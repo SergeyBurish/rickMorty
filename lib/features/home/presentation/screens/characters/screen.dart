@@ -18,31 +18,50 @@ class CharactersScreen extends StatefulWidget {
 }
 
 class _CharactersScreenState extends State<CharactersScreen> {
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
-    context.read<HomeBloc>().add(HomeUpdateEvent());
+    _scrollController.addListener(() {
+      final homeBloc = context.read<HomeBloc>();
+      if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent * 0.8
+            && !homeBloc.state.inProgress) { //  && homeBloc.state.nextUrl != null
+        homeBloc.add(GetMoreCharactersEvent());
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final List<Character> characters = context.watch<HomeBloc>().state.characters;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('characters'.tr()),
-        backgroundColor: context.colorScheme.appBarBackground,
-        actions: [
-          TextButton(
-            onPressed: () => context.router.push(const FavoritesRoute()), 
-            child: Text('favorites'.tr())
+    return BlocBuilder<HomeBloc, HomeState>(
+      buildWhen: (previous, current) => previous.status != current.status,
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text('characters'.tr()),
+            backgroundColor: context.colorScheme.appBarBackground,
+            actions: [
+              TextButton(
+                onPressed: () => context.router.push(const FavoritesRoute()),
+                child: Text('favorites'.tr()),
+              ),
+            ],
           ),
-        ],
-      ),
-      body: CharactersView(
-        characters: characters,
-        onUpdate: () => context.read<HomeBloc>().add(HomeUpdateEvent()),
-      ),
+          body: CharactersView(
+            characters: state.characters,
+            loading: state.inProgress,
+            scrollController: _scrollController,
+            onUpdate: () => context.read<HomeBloc>().add(GetMoreCharactersEvent()),
+          ),
+        );
+      },
     );
   }
 }

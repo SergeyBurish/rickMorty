@@ -11,9 +11,9 @@ class HomeRepositoryImp implements HomeRepository{
   HomeRepositoryImp({required this.remoteDataSource});
 
   @override
-  Future<Either<Exception, CharactersPage>> getCharacters() async {    
+  Future<Either<Exception, CharactersPage>> getCharacters(String? nextUrl) async {    
     try {
-      CharactersPageDto? response = await remoteDataSource.getCharacters();
+      CharactersPageDto? response = await remoteDataSource.getCharacters(nextUrl);
       if (response == null) {
         return Left(Exception('fail to get characters'));
       }

@@ -4,5 +4,5 @@ import '../entity/characters_page.dart';
 
 
 abstract interface class HomeRepository{
-    Future<Either<Exception, CharactersPage>> getCharacters();
+    Future<Either<Exception, CharactersPage>> getCharacters(String? nextUrl);
 }

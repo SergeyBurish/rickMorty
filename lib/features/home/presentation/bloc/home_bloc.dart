@@ -15,19 +15,34 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc({required this.homeUsecase})
       : super(HomeState.initial()) {
 
-    on<HomeUpdateEvent>((event, emit) async {
-      emit(state.copyWith.status(HomeStatus.inProgress));
-
-      final output = await homeUsecase.getCharacters();
-      output.fold(
-        ifLeft: (_) => emit(state.copyWith.status(HomeStatus.error)),
-        ifRight: (CharactersPage charactersPage) {
-          emit(state.copyWith(
-            status: HomeStatus.success,
-            characters: charactersPage.characters,
-          ));
-        }
-      );
+    on<_CharactersInitEvent>((event, emit) async {
+      await _getNextCharacters(emit);
     });
+
+    on<GetMoreCharactersEvent>((event, emit) async {
+      if (state.nextUrl != null) {
+        await _getNextCharacters(emit);
+      }
+    });
+
+    add(_CharactersInitEvent());
+  }
+
+  Future<void> _getNextCharacters (Emitter<HomeState> emit) async {
+    emit(state.copyWith.status(HomeStatus.inProgress));
+
+    final output = await homeUsecase.getCharacters(state.nextUrl);
+    output.fold(
+      ifLeft: (_) => emit(state.copyWith.status(HomeStatus.error)),
+      ifRight: (CharactersPage charactersPage) {
+        emit(state.copyWith(
+          status: HomeStatus.success,
+          characters: [
+            ...state.characters, 
+            ...charactersPage.characters],
+          nextUrl: charactersPage.info.next,
+        ));
+      }
+    );
   }
 }

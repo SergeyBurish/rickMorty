@@ -4,7 +4,7 @@ import '../entity/characters_page.dart';
 import '../repository/home_repository.dart';
 
 abstract interface class HomeUsecase{
-    Future<Either<Exception, CharactersPage>> getCharacters();
+    Future<Either<Exception, CharactersPage>> getCharacters(String? nextUrl);
 }
 
 class HomeUsecaseImp implements HomeUsecase{
@@ -13,6 +13,6 @@ class HomeUsecaseImp implements HomeUsecase{
   HomeUsecaseImp({required this.repository});
 
   @override
-  Future<Either<Exception, CharactersPage>> getCharacters() => 
-      repository.getCharacters();
+  Future<Either<Exception, CharactersPage>> getCharacters(String? nextUrl) => 
+      repository.getCharacters(nextUrl);
 }

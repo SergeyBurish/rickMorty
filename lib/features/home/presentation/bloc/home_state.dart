@@ -11,13 +11,18 @@ enum HomeStatus {
 class HomeState {
   final HomeStatus status;
   final List<Character> characters;
+  final String? nextUrl;
 
   HomeState._({
     required this.status,
     required this.characters,
+    this.nextUrl,
   });
 
   HomeState.initial() :
     status = HomeStatus.idle,
-    characters = [];
+    characters = [],
+    nextUrl = null;
+
+  bool get inProgress => status == HomeStatus.inProgress;
 }

@@ -6,7 +6,12 @@ part 'character_dto.g.dart';
 
 @JsonSerializable()
 class CharacterDto extends Character {
-  CharacterDto({required super.name, required super.status, required super.species});
+  CharacterDto({
+    required super.id,
+    required super.name,
+    required super.status,
+    required super.species,
+  });
 
   factory CharacterDto.fromJson(Map<String, dynamic> json) => _$CharacterDtoFromJson(json);
   Map<String, dynamic> toJson() => _$CharacterDtoToJson(this);

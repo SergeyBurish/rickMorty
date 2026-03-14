@@ -11,6 +11,8 @@ abstract class _$HomeStateCWProxy {
 
   HomeState characters(List<Character> characters);
 
+  HomeState nextUrl(String? nextUrl);
+
   /// Creates a new instance with the provided field values.
   /// Passing `null` to a nullable field nullifies it, while `null` for a non-nullable field is ignored. To update a single field use `HomeState(...).copyWith.fieldName(value)`.
   ///
@@ -18,7 +20,11 @@ abstract class _$HomeStateCWProxy {
   /// ```dart
   /// HomeState(...).copyWith(id: 12, name: "My name")
   /// ```
-  HomeState call({HomeStatus status, List<Character> characters});
+  HomeState call({
+    HomeStatus status,
+    List<Character> characters,
+    String? nextUrl,
+  });
 }
 
 /// Callable proxy for `copyWith` functionality.
@@ -36,6 +42,9 @@ class _$HomeStateCWProxyImpl implements _$HomeStateCWProxy {
       call(characters: characters);
 
   @override
+  HomeState nextUrl(String? nextUrl) => call(nextUrl: nextUrl);
+
+  @override
   /// Creates a new instance with the provided field values.
   /// Passing `null` to a nullable field nullifies it, while `null` for a non-nullable field is ignored. To update a single field use `HomeState(...).copyWith.fieldName(value)`.
   ///
@@ -46,6 +55,7 @@ class _$HomeStateCWProxyImpl implements _$HomeStateCWProxy {
   HomeState call({
     Object? status = const $CopyWithPlaceholder(),
     Object? characters = const $CopyWithPlaceholder(),
+    Object? nextUrl = const $CopyWithPlaceholder(),
   }) {
     return HomeState._(
       status: status == const $CopyWithPlaceholder() || status == null
@@ -57,6 +67,10 @@ class _$HomeStateCWProxyImpl implements _$HomeStateCWProxy {
           ? _value.characters
           // ignore: cast_nullable_to_non_nullable
           : characters as List<Character>,
+      nextUrl: nextUrl == const $CopyWithPlaceholder()
+          ? _value.nextUrl
+          // ignore: cast_nullable_to_non_nullable
+          : nextUrl as String?,
     );
   }
 }
