@@ -11,33 +11,17 @@
 part of 'app_router.dart';
 
 /// generated route for
-/// [CharactersScreen]
-class CharactersRoute extends PageRouteInfo<void> {
-  const CharactersRoute({List<PageRouteInfo>? children})
-    : super(CharactersRoute.name, initialChildren: children);
+/// [HomeScreen]
+class HomeRoute extends PageRouteInfo<void> {
+  const HomeRoute({List<PageRouteInfo>? children})
+    : super(HomeRoute.name, initialChildren: children);
 
-  static const String name = 'CharactersRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const CharactersScreen();
-    },
-  );
-}
-
-/// generated route for
-/// [FavoritesScreen]
-class FavoritesRoute extends PageRouteInfo<void> {
-  const FavoritesRoute({List<PageRouteInfo>? children})
-    : super(FavoritesRoute.name, initialChildren: children);
-
-  static const String name = 'FavoritesRoute';
+  static const String name = 'HomeRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const FavoritesScreen();
+      return const HomeScreen();
     },
   );
 }

@@ -1,15 +1,9 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/theme/app_theme.dart';
-import '../../../../../router/app_router.dart';
-import '../../../domain/entity/character.dart';
 import '../../bloc/home_bloc.dart';
 import 'view.dart';
 
-@RoutePage()
 class CharactersScreen extends StatefulWidget {
   const CharactersScreen({super.key});
 
@@ -43,23 +37,11 @@ class _CharactersScreenState extends State<CharactersScreen> {
     return BlocBuilder<HomeBloc, HomeState>(
       buildWhen: (previous, current) => previous.status != current.status,
       builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
-            title: Text('characters'.tr()),
-            backgroundColor: context.colorScheme.appBarBackground,
-            actions: [
-              TextButton(
-                onPressed: () => context.router.push(const FavoritesRoute()),
-                child: Text('favorites'.tr()),
-              ),
-            ],
-          ),
-          body: CharactersView(
-            characters: state.characters,
-            loading: state.inProgress,
-            scrollController: _scrollController,
-            onUpdate: () => context.read<HomeBloc>().add(GetMoreCharactersEvent()),
-          ),
+        return CharactersView(
+          characters: state.characters,
+          loading: state.inProgress,
+          scrollController: _scrollController,
+          onUpdate: () => context.read<HomeBloc>().add(GetMoreCharactersEvent()),
         );
       },
     );
