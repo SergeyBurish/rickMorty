@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../bloc/home_bloc.dart';
-import 'view.dart';
+import '../../widgets/characters_list.dart';
 
 class CharactersScreen extends StatefulWidget {
   const CharactersScreen({super.key});
@@ -37,11 +37,12 @@ class _CharactersScreenState extends State<CharactersScreen> {
     return BlocBuilder<HomeBloc, HomeState>(
       buildWhen: (previous, current) => previous.status != current.status,
       builder: (context, state) {
-        return CharactersView(
+        return CharactersList(
           characters: state.characters,
+          favoriteIds: state.favoriteIds,
           loading: state.inProgress,
           scrollController: _scrollController,
-          onUpdate: () => context.read<HomeBloc>().add(GetMoreCharactersEvent()),
+          onFavoriteTap: (id) => context.read<HomeBloc>().add(FavoriteTapEvent(id: id)),
         );
       },
     );

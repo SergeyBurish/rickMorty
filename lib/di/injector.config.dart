@@ -12,6 +12,7 @@
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../features/home/data/data_sources/local_data_source.dart' as _i401;
 import '../features/home/data/data_sources/remote_data_source.dart' as _i985;
 import '../features/home/domain/repository/home_repository.dart' as _i855;
 import '../features/home/domain/usecase/home_usecase.dart' as _i951;
@@ -35,6 +36,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i985.HomeRemoteDataSource>(
       () => module.remoteDataSource(),
     );
+    gh.lazySingleton<_i401.HomeLocalDataSource>(
+      () => module.homeLocalDataSource(),
+    );
     gh.lazySingleton<_i816.SettingsRepository>(
       () => module.settingsRepository(gh<_i502.SettingsLocalDataSource>()),
     );
@@ -42,7 +46,10 @@ extension GetItInjectableX on _i174.GetIt {
       () => module.settingsUsecase(gh<_i816.SettingsRepository>()),
     );
     gh.lazySingleton<_i855.HomeRepository>(
-      () => module.homeRepository(gh<_i985.HomeRemoteDataSource>()),
+      () => module.homeRepository(
+        gh<_i985.HomeRemoteDataSource>(),
+        gh<_i401.HomeLocalDataSource>(),
+      ),
     );
     gh.lazySingleton<_i951.HomeUsecase>(
       () => module.homeUsecase(gh<_i855.HomeRepository>()),

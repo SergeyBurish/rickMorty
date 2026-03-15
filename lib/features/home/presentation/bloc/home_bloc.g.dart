@@ -11,6 +11,8 @@ abstract class _$HomeStateCWProxy {
 
   HomeState characters(List<Character> characters);
 
+  HomeState favoriteIds(Set<int> favoriteIds);
+
   HomeState nextUrl(String? nextUrl);
 
   /// Creates a new instance with the provided field values.
@@ -23,6 +25,7 @@ abstract class _$HomeStateCWProxy {
   HomeState call({
     HomeStatus status,
     List<Character> characters,
+    Set<int> favoriteIds,
     String? nextUrl,
   });
 }
@@ -42,6 +45,9 @@ class _$HomeStateCWProxyImpl implements _$HomeStateCWProxy {
       call(characters: characters);
 
   @override
+  HomeState favoriteIds(Set<int> favoriteIds) => call(favoriteIds: favoriteIds);
+
+  @override
   HomeState nextUrl(String? nextUrl) => call(nextUrl: nextUrl);
 
   @override
@@ -55,6 +61,7 @@ class _$HomeStateCWProxyImpl implements _$HomeStateCWProxy {
   HomeState call({
     Object? status = const $CopyWithPlaceholder(),
     Object? characters = const $CopyWithPlaceholder(),
+    Object? favoriteIds = const $CopyWithPlaceholder(),
     Object? nextUrl = const $CopyWithPlaceholder(),
   }) {
     return HomeState._(
@@ -67,6 +74,11 @@ class _$HomeStateCWProxyImpl implements _$HomeStateCWProxy {
           ? _value.characters
           // ignore: cast_nullable_to_non_nullable
           : characters as List<Character>,
+      favoriteIds:
+          favoriteIds == const $CopyWithPlaceholder() || favoriteIds == null
+          ? _value.favoriteIds
+          // ignore: cast_nullable_to_non_nullable
+          : favoriteIds as Set<int>,
       nextUrl: nextUrl == const $CopyWithPlaceholder()
           ? _value.nextUrl
           // ignore: cast_nullable_to_non_nullable

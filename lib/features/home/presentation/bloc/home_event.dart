@@ -6,3 +6,8 @@ sealed class HomeEvent {}
 class _CharactersInitEvent extends HomeEvent {}
 
 class GetMoreCharactersEvent extends HomeEvent {}
+
+class FavoriteTapEvent extends HomeEvent {
+  final int id;
+  FavoriteTapEvent({required this.id});
+}

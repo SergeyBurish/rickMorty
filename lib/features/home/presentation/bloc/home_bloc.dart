@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../domain/entity/character.dart';
 import '../../domain/entity/characters_page.dart';
+import '../../domain/entity/favorites.dart';
 import '../../domain/usecase/home_usecase.dart';
 
 part 'home_bloc.g.dart';
@@ -17,12 +18,39 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     on<_CharactersInitEvent>((event, emit) async {
       await _getNextCharacters(emit);
+
+      emit(state.copyWith.status(HomeStatus.inProgress));
+      final output = await homeUsecase.getFavorites();
+      output.fold(
+        ifLeft: (_) => emit(state.copyWith.status(HomeStatus.error)),
+        ifRight: (Favorites favorites) {
+          emit(state.copyWith(
+            status: HomeStatus.success,
+            favoriteIds: favorites.favoriteIds,
+          ));
+        }
+      );
     });
 
     on<GetMoreCharactersEvent>((event, emit) async {
       if (state.nextUrl != null) {
         await _getNextCharacters(emit);
       }
+    });
+
+    on<FavoriteTapEvent>((event, emit) async {
+      emit(state.copyWith.status(HomeStatus.inProgress));
+
+      final output = await homeUsecase.toggleFavorite(event.id, state.favoriteIds);
+      output.fold(
+        ifLeft: (_) => emit(state.copyWith.status(HomeStatus.error)),
+        ifRight: (Favorites favorites) {
+          emit(state.copyWith(
+            status: HomeStatus.success,
+            favoriteIds: favorites.favoriteIds,
+          ));
+        }
+      );
     });
 
     add(_CharactersInitEvent());
