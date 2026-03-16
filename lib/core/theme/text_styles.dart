@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 
 class AppTextStyles extends ThemeExtension<AppTextStyles>{
   final TextStyle characterText;
-  final TextStyle buttonText;
+  final TextStyle typeText;
     
   const AppTextStyles({
     required this.characterText,
-    required this.buttonText,
+    required this.typeText,
   });
 
   @override
   AppTextStyles copyWith({
     TextStyle? characterText,
-    TextStyle? buttonText,
+    TextStyle? typeText,
   }) {
     return AppTextStyles(
       characterText: characterText ?? this.characterText,
-      buttonText: buttonText ?? this.buttonText,
+      typeText: typeText ?? this.typeText,
     );  
   }
 
@@ -25,7 +25,7 @@ class AppTextStyles extends ThemeExtension<AppTextStyles>{
     if (other is! AppTextStyles) return this;
     return AppTextStyles(
       characterText: TextStyle.lerp(characterText, other.characterText, t)!,
-      buttonText: TextStyle.lerp(buttonText, other.buttonText, t)!,
+      typeText: TextStyle.lerp(typeText, other.typeText, t)!,
     );
   }
 }

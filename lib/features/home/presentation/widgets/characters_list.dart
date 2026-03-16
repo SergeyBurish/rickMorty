@@ -21,32 +21,31 @@ class CharactersList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: ListView.separated(
-            controller: scrollController,
-            itemBuilder: (context, index) {
-              if (index < characters.length) {
-                final id = characters[index].id;
-                return CharacterCard(
-                  name: '$id ${characters[index].name}',
-                  isFavorite: favoriteIds.contains(id),
-                  onFavoriteTap: () => onFavoriteTap(id),
-                );
-              }
-              return const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircularProgressIndicator(),
-                ],
-              );
-            },
-            separatorBuilder:(_, _) => const SizedBox(height: Dm.s10),
-            itemCount: loading ? characters.length + 1 : characters.length,
-          ),
-        )
-      ],
+    return ListView.separated(
+      controller: scrollController,
+      itemBuilder: (context, index) {
+        if (index < characters.length) {
+          final character = characters[index];
+          final id = character.id;
+          return CharacterCard(
+            name: '$id ${character.name}',
+            species: character.species,
+            status: character.status,
+            imageUrl: character.image,
+            type: character.type,
+            isFavorite: favoriteIds.contains(id),
+            onFavoriteTap: () => onFavoriteTap(id),
+          );
+        }
+        return const Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CircularProgressIndicator(),
+          ],
+        );
+      },
+      separatorBuilder:(_, _) => const SizedBox(height: Dm.s10),
+      itemCount: loading ? characters.length + 1 : characters.length,
     );
   }
 }

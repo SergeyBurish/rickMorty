@@ -11,6 +11,8 @@ class CharacterDto extends Character {
     required super.name,
     required super.status,
     required super.species,
+    required super.image,
+    super.type,
   });
 
   factory CharacterDto.fromJson(Map<String, dynamic> json) => _$CharacterDtoFromJson(json);

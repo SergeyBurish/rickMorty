@@ -12,15 +12,15 @@ class AppTheme {
       extensions: <ThemeExtension<dynamic>>[
         const AppColorScheme(
           appBarBackground: Color.fromARGB(107, 214, 231, 244),
+          favoriteStar: Colors.orange,
         ),
         const AppTextStyles(
           characterText: TextStyle(
             fontSize: 18,
           ),
-          buttonText: TextStyle(
+          typeText: TextStyle(
             color: Colors.black,
             fontSize: 14,
-            fontWeight: FontWeight.bold
           ),
         ),
       ],

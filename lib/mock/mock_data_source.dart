@@ -50,8 +50,23 @@ $caracters
     "id":$id,
     "name":"NameID$id",
     "status":"${id%7 == 0 ? 'Dead' : 'Alive'}",
-    "species":"${id%8 == 0 ? 'Alien' : 'Human'}"
+    "species":"${id%8 == 0 ? 'Alien' : 'Human'}",
+    "image":"${_imageUrls[id%_imageUrls.length]}",
+    "type":"Human with ants in his eyes fdskajkl;fdsajfkld;s hfjdsajkl;fds jkflds;afjkl; long long very long type"
   }
 ''';
   }
+
+  static const List<String> _imageUrls = [
+    'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg',
+    'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ElephantsDream.jpg',
+    'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerBlazes.jpg',
+    'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerEscapes.jpg',
+    'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerFun.jpg',
+    'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerJoyrides.jpg',
+    'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerMeltdowns.jpg',
+    'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/Sintel.jpg',
+    'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/SubaruOutbackOnStreetAndDirt.jpg',
+    'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/TearsOfSteel.jpg'
+  ];
 }
