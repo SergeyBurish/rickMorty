@@ -35,8 +35,8 @@ class CharacterCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           boxShadow: [const BoxShadow(
             color: Colors.grey,
-            spreadRadius: 5,
-            blurRadius: 7,
+            spreadRadius: 3,
+            blurRadius: 5,
             offset: Offset(0, 3),
           ),]
         ),

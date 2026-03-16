@@ -9,7 +9,9 @@ part of 'settings_cubit.dart';
 abstract class _$SettingsStateCWProxy {
   SettingsState status(SettingsStatus status);
 
-  SettingsState themeType(ThemeType themeType);
+  SettingsState themeMode(ThemeMode themeMode);
+
+  SettingsState appLocale(AppLocale appLocale);
 
   /// Creates a new instance with the provided field values.
   /// Passing `null` to a nullable field nullifies it, while `null` for a non-nullable field is ignored. To update a single field use `SettingsState(...).copyWith.fieldName(value)`.
@@ -18,7 +20,11 @@ abstract class _$SettingsStateCWProxy {
   /// ```dart
   /// SettingsState(...).copyWith(id: 12, name: "My name")
   /// ```
-  SettingsState call({SettingsStatus status, ThemeType themeType});
+  SettingsState call({
+    SettingsStatus status,
+    ThemeMode themeMode,
+    AppLocale appLocale,
+  });
 }
 
 /// Callable proxy for `copyWith` functionality.
@@ -32,7 +38,10 @@ class _$SettingsStateCWProxyImpl implements _$SettingsStateCWProxy {
   SettingsState status(SettingsStatus status) => call(status: status);
 
   @override
-  SettingsState themeType(ThemeType themeType) => call(themeType: themeType);
+  SettingsState themeMode(ThemeMode themeMode) => call(themeMode: themeMode);
+
+  @override
+  SettingsState appLocale(AppLocale appLocale) => call(appLocale: appLocale);
 
   @override
   /// Creates a new instance with the provided field values.
@@ -44,17 +53,22 @@ class _$SettingsStateCWProxyImpl implements _$SettingsStateCWProxy {
   /// ```
   SettingsState call({
     Object? status = const $CopyWithPlaceholder(),
-    Object? themeType = const $CopyWithPlaceholder(),
+    Object? themeMode = const $CopyWithPlaceholder(),
+    Object? appLocale = const $CopyWithPlaceholder(),
   }) {
     return SettingsState._(
       status: status == const $CopyWithPlaceholder() || status == null
           ? _value.status
           // ignore: cast_nullable_to_non_nullable
           : status as SettingsStatus,
-      themeType: themeType == const $CopyWithPlaceholder() || themeType == null
-          ? _value.themeType
+      themeMode: themeMode == const $CopyWithPlaceholder() || themeMode == null
+          ? _value.themeMode
           // ignore: cast_nullable_to_non_nullable
-          : themeType as ThemeType,
+          : themeMode as ThemeMode,
+      appLocale: appLocale == const $CopyWithPlaceholder() || appLocale == null
+          ? _value.appLocale
+          // ignore: cast_nullable_to_non_nullable
+          : appLocale as AppLocale,
     );
   }
 }

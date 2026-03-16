@@ -10,19 +10,17 @@ enum SettingsStatus {
 @CopyWith(constructor: '_')
 class SettingsState {
   final SettingsStatus status;
-  final ThemeType themeType;
-
-  SettingsState({
-    required this.status,
-    required this.themeType,
-  });
+  final ThemeMode themeMode;
+  final AppLocale appLocale;
 
   SettingsState._({
     required this.status,
-    required this.themeType,
+    required this.themeMode,
+    required this.appLocale,
   });
 
   SettingsState.initial() :
     status = SettingsStatus.idle,
-    themeType = ThemeType.system;
+    themeMode = ThemeMode.system,
+    appLocale = AppLocale.system;
 }

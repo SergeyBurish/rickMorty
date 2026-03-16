@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'core/app_config.dart';
 import 'core/theme/app_theme.dart';
 import 'di/injector.dart';
 import 'di/locator.dart';
@@ -18,7 +19,7 @@ void main() async {
 
   runApp(
     EasyLocalization(
-      supportedLocales: const <Locale>[Locale('en', 'US'), Locale('ru', 'RU')],
+      supportedLocales: AppConfig.supportedLocales.map((e) => e.locale).toList(),
       path: 'l10n',
       child: const MyApp(),
     ),
@@ -34,14 +35,26 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => HomeBloc(homeUsecase: Locator.homeUsecase)),
         BlocProvider(create: (context) => SettingsCubit(settingsUsecase: Locator.settingsUsecase)),
       ],
-      child: MaterialApp.router(
-        title: 'title'.tr(),
-        localizationsDelegates: context.localizationDelegates,
-        supportedLocales: context.supportedLocales,
-        locale: context.locale,
-        theme: AppTheme.createLightTheme(),
-        darkTheme: AppTheme.createDarkTheme(),
-        routerConfig: router.config(),
+      child: Builder(
+        builder: (context) {
+          return BlocSelector<SettingsCubit, SettingsState, ThemeMode>(
+            selector: (state) {
+              return state.themeMode;
+            },
+            builder: (context, themeMode) {
+              return MaterialApp.router(
+                title: 'title'.tr(),
+                localizationsDelegates: context.localizationDelegates,
+                supportedLocales: context.supportedLocales,
+                locale: context.locale,
+                theme: AppTheme.createLightTheme(),
+                darkTheme: AppTheme.createDarkTheme(),
+                themeMode: themeMode,
+                routerConfig: router.config(),
+              );
+            },
+          );
+        },
       ),
     );
   }

@@ -3,7 +3,13 @@
   "characters": "Characters",
   "favorites": "Favorites",
   "settings": "Settings",
-  "update": "Update",
+  "select_language": "Select a language",
+  "select_theme": "Select a theme",
+  "system": "system",
+  "light": "light",
+  "dark": "dark",
+  "english": "english",
+  "russian": "russian",
 
   "@_____________________ERRORS_____________________": {},
   "error": "Error"

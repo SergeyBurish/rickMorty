@@ -1,10 +1,10 @@
-enum ThemeType{
-  light,
-  dark,
-  system,
-}
-class SettingsEntity {
-  final ThemeType themeType;
+import 'package:flutter/material.dart';
 
-  SettingsEntity({required this.themeType});
+import '../../../../core/app_config.dart';
+
+class SettingsEntity {
+  final ThemeMode themeMode;
+  final AppLocale locale;
+
+  SettingsEntity({required this.themeMode, required this.locale});
 }

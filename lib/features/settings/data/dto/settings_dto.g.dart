@@ -6,14 +6,25 @@ part of 'settings_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-SettingsDto _$SettingsDtoFromJson(Map<String, dynamic> json) =>
-    SettingsDto(themeType: $enumDecode(_$ThemeTypeEnumMap, json['themeType']));
+SettingsDto _$SettingsDtoFromJson(Map<String, dynamic> json) => SettingsDto(
+  themeMode: $enumDecode(_$ThemeModeEnumMap, json['themeMode']),
+  locale: $enumDecode(_$AppLocaleEnumMap, json['locale']),
+);
 
 Map<String, dynamic> _$SettingsDtoToJson(SettingsDto instance) =>
-    <String, dynamic>{'themeType': _$ThemeTypeEnumMap[instance.themeType]!};
+    <String, dynamic>{
+      'themeMode': _$ThemeModeEnumMap[instance.themeMode]!,
+      'locale': _$AppLocaleEnumMap[instance.locale]!,
+    };
 
-const _$ThemeTypeEnumMap = {
-  ThemeType.light: 'light',
-  ThemeType.dark: 'dark',
-  ThemeType.system: 'system',
+const _$ThemeModeEnumMap = {
+  ThemeMode.system: 'system',
+  ThemeMode.light: 'light',
+  ThemeMode.dark: 'dark',
+};
+
+const _$AppLocaleEnumMap = {
+  AppLocale.system: 'system',
+  AppLocale.en: 'en',
+  AppLocale.ru: 'ru',
 };
