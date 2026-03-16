@@ -6,8 +6,8 @@ import '../features/home/data/dto/characters_page_dto.dart';
 class MockDataSource implements HomeRemoteDataSource {
   static const int _pageLength = 20;
 
-    @override
-  Future<CharactersPageDto> getCharacters(String? nextUrl) async {
+  @override
+  Future<CharactersPageDto?> getCharacters(String? nextUrl) async {
     final mockJson = switch (nextUrl) {
       null =>    _pageMock(start:  1,                  next: '"page2"'),
       'page2' => _pageMock(start: _pageLength + 1,     next: '"page3"'),

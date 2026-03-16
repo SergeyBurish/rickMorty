@@ -8,4 +8,7 @@ abstract interface class HomeRepository{
     Future<Either<Exception, CharactersPage>> getCharacters(String? nextUrl);
     Future<Either<Exception, Favorites>> getFavorites();
     Future<Either<Exception, void>> saveFavorites(Favorites favorites);
+
+    Future<Either<Exception, CharactersPage>> getFromCache();
+    Future<Either<Exception, void>> setToCache(CharactersPage charactersPage);
 }

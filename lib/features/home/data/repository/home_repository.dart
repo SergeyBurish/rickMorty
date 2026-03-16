@@ -46,4 +46,27 @@ class HomeRepositoryImp implements HomeRepository{
       return Left(Exception(e));
     }
   }
+
+  @override
+  Future<Either<Exception, CharactersPage>> getFromCache() async {
+    try {
+      final CharactersPageDto? response = await localDataSource.getCharactersPage();
+      if (response == null) {
+        return Left(Exception('fail to get characters from cache'));
+      }
+      return Right(response.toCharactersPage);
+    } on Exception catch (e) {
+      return Left(Exception(e));
+    }
+  }
+
+  @override
+  Future<Either<Exception, void>> setToCache(CharactersPage charactersPage) async {
+    try {
+      await localDataSource.saveCharactersPage(charactersPage.toDto);
+      return const Right(null);
+    } on Exception catch (e) {
+      return Left(Exception(e));
+    }
+  }
 }

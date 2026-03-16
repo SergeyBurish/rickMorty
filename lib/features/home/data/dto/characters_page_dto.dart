@@ -33,3 +33,26 @@ extension CharactersPageDtoMapper on CharactersPageDto {
     characters: results,
   );
 }
+
+extension CharactersPageMapper on CharactersPage {
+  CharactersPageDto get toDto => CharactersPageDto(
+    info: info.toDto, 
+    results: characters.map((e)=>CharacterDto(
+      id: e.id,
+      name: e.name,
+      status: e.status,
+      species: e.species,
+      image: e.image,
+      type: e.type,
+    )).toList(),
+  );
+}
+
+extension InfoMapper on Info {
+  InfoDto get toDto => InfoDto(
+    count: count, 
+    pages: pages,
+    next: next,
+    prev: prev,
+  );
+}

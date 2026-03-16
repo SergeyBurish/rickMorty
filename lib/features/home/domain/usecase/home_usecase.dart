@@ -8,6 +8,9 @@ abstract interface class HomeUsecase{
     Future<Either<Exception, CharactersPage>> getCharacters(String? nextUrl);
     Future<Either<Exception, Favorites>> getFavorites();
     Future<Either<Exception, Favorites>> toggleFavorite(int id, Set<int> favoriteIds);
+
+    Future<Either<Exception, CharactersPage>> getFromCache();
+    Future<Either<Exception, void>> setToCache(CharactersPage charactersPage);
 }
 
 class HomeUsecaseImp implements HomeUsecase{
@@ -38,4 +41,12 @@ class HomeUsecaseImp implements HomeUsecase{
 
     return Left(Exception('fail to save Favorites'));
   }
+
+  @override
+  Future<Either<Exception, CharactersPage>> getFromCache() => 
+      repository.getFromCache();
+
+    @override
+  Future<Either<Exception, void>> setToCache(CharactersPage charactersPage) => 
+      repository.setToCache(charactersPage);
 }

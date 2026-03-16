@@ -62,12 +62,39 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     final output = await homeUsecase.getCharacters(state.nextUrl);
     output.fold(
       ifLeft: (_) => emit(state.copyWith.status(HomeStatus.error)),
-      ifRight: (CharactersPage charactersPage) {
+      ifRight: (CharactersPage charactersPage) async {
         emit(state.copyWith(
           status: HomeStatus.success,
           characters: [
             ...state.characters, 
             ...charactersPage.characters],
+          nextUrl: charactersPage.info.next,
+        ));
+
+        final CharactersPage charactersPageCache = CharactersPage(
+          info: charactersPage.info,
+          characters: [...state.characters]
+        );
+
+        await homeUsecase.setToCache(charactersPageCache);
+      }
+    );
+
+    if (output.isLeft) {
+      await _tryGetCharactersFromCache(emit);
+    }
+  }
+
+  Future<void> _tryGetCharactersFromCache (Emitter<HomeState> emit) async {
+    emit(state.copyWith.status(HomeStatus.inProgress));
+    final output = await homeUsecase.getFromCache();
+
+    output.fold(
+      ifLeft: (_) => emit(state.copyWith.status(HomeStatus.error)),
+      ifRight: (CharactersPage charactersPage) async {
+        emit(state.copyWith(
+          status: HomeStatus.success,
+          characters: [...charactersPage.characters],
           nextUrl: charactersPage.info.next,
         ));
       }
