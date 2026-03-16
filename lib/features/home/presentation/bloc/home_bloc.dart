@@ -53,6 +53,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       );
     });
 
+    on<FavoriteSortEvent>((event, emit) async {
+      emit(state.copyWith.status(HomeStatus.inProgress));
+
+      emit(state.copyWith(
+        status: HomeStatus.success,
+        favoritesSort: event.favoritesSort,
+      ));
+    });
+
     add(_CharactersInitEvent());
   }
 

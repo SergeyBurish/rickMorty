@@ -11,3 +11,8 @@ class FavoriteTapEvent extends HomeEvent {
   final int id;
   FavoriteTapEvent({required this.id});
 }
+
+class FavoriteSortEvent extends HomeEvent {
+  final FavoritesSort favoritesSort;
+  FavoriteSortEvent({required this.favoritesSort});
+}
