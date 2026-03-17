@@ -12,5 +12,6 @@
   "russian": "russian",
 
   "@_____________________ERRORS_____________________": {},
-  "error": "Error"
+  "error": "Error",
+  "error_message": "Something went wrong, please try again later."
 }

@@ -37,6 +37,7 @@ class HomeState {
     nextUrl = null;
 
   bool get inProgress => status == HomeStatus.inProgress;
+  bool get isError => status == HomeStatus.error;
   bool get favoritesIsNotEmpty => favoriteIds.isNotEmpty;
   bool get favoritesSortedAsc => favoritesSort == FavoritesSort.asc;
   bool get favoritesSortedDes => favoritesSort == FavoritesSort.des;

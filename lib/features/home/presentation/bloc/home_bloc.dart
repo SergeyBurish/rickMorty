@@ -70,7 +70,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     final output = await homeUsecase.getCharacters(state.nextUrl);
     output.fold(
-      ifLeft: (_) => emit(state.copyWith.status(HomeStatus.error)),
+      ifLeft: (_) => emit(state.copyWith.status(HomeStatus.idle)),
       ifRight: (CharactersPage charactersPage) async {
         emit(state.copyWith(
           status: HomeStatus.success,

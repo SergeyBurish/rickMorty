@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -32,10 +33,32 @@ class _CharactersScreenState extends State<CharactersScreen> {
     super.dispose();
   }
 
+  void _showErrorDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('error'.tr()),
+        content: Text('error_message'.tr()),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeBloc, HomeState>(
+    return BlocConsumer<HomeBloc, HomeState>(
+      listenWhen: (previous, current) => previous.status != current.status,
       buildWhen: (previous, current) => previous.status != current.status,
+      listener: (BuildContext context, HomeState state) {
+        if (state.isError) {
+          _showErrorDialog(context);
+        }
+      },
       builder: (context, state) {
         return CharactersList(
           characters: state.characters,
