@@ -1,0 +1,16 @@
+{
+  "title": "Rick and Morty",
+  "characters": "Characters",
+  "favorites": "Favorites",
+  "settings": "Settings",
+  "select_language": "Select a language",
+  "select_theme": "Select a theme",
+  "system": "system",
+  "light": "light",
+  "dark": "dark",
+  "english": "english",
+  "russian": "russian",
+
+  "@_____________________ERRORS_____________________": {},
+  "error": "Error"
+}
